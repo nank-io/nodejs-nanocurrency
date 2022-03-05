@@ -1,31 +1,32 @@
 const Wallet = require('./index')
 
 describe('Wallet', () => {
-  let wallet
+  const wallet = new Wallet()
 
-  beforeEach(async () => {
-    wallet = new Wallet()
-    await wallet.generate()
-  })
+  describe('generate()', () => {
+    beforeEach(async () => {
+      await wallet.generate()
+    })
+    
+    it('has a `seed`', () => {
+      expect(wallet).toHaveProperty('seed')
+    })
   
-  it('has a `seed`', () => {
-    expect(wallet).toHaveProperty('seed')
-  })
-
-  it('has a `secretKey`', () => {
-    expect(wallet).toHaveProperty('secretKey')
-  })
-
-  it('has a `publicKey`', () => {
-    expect(wallet).toHaveProperty('publicKey')
-  })
-
-  it('has an `address`', () => {
-    expect(wallet).toHaveProperty('address')
-  })
-
-  it('has a `mnemonic`', () => {
-    expect(wallet).toHaveProperty('mnemonic')
+    it('has a `secretKey`', () => {
+      expect(wallet).toHaveProperty('secretKey')
+    })
+  
+    it('has a `publicKey`', () => {
+      expect(wallet).toHaveProperty('publicKey')
+    })
+  
+    it('has an `address`', () => {
+      expect(wallet).toHaveProperty('address')
+    })
+  
+    it('has a `mnemonic`', () => {
+      expect(wallet).toHaveProperty('mnemonic')
+    })
   })
 
   describe('importWithMnemonic()', () => {
@@ -53,6 +54,10 @@ describe('Wallet', () => {
   })
 
   describe('isValid()', () => {
+    beforeEach(async () => {
+      await wallet.generate()
+    })
+    
     describe('when wallet is valid', () => {
       it('returns true', () => {
         expect(Wallet.isValid(wallet)).toBe(true)
