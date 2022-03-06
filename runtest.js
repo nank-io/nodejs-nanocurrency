@@ -19,9 +19,11 @@ const path = '/proxy'
 const proxyAPI = new ProxyAPI({ hostname, path })
 const proxyRPC = new ProxyRPC({ proxyAPI })
 
+// instance new transaction class for each wallet
 const walletTransaction = new Transaction({ wallet, proxyRPC })
 const walletTransaction2 = new Transaction({ wallet: wallet2, proxyRPC })
 
+// first test: all balance from wallet 1 to wallet 2
 const sendFromWallet1ToWallet2 = async () => {
   const sendRes = await walletTransaction.send({
     amount: 0.000222,
@@ -36,6 +38,7 @@ const sendFromWallet1ToWallet2 = async () => {
   console.log(`Wallet 2 balance`, balance)
 }
 
+// first test: all balance from wallet 2 to wallet 1
 const sendFromWallet2ToWallet1 = async () => {
   const sendRes = await walletTransaction2.send({
     amount: 0.000222,
@@ -50,6 +53,7 @@ const sendFromWallet2ToWallet1 = async () => {
   console.log(`Wallet 1 balance`, balance)
 }
 
+// show balance of each wallet
 const balances = async () => {
   const balance = await proxyRPC.getBalanceOf(wallet.address)
   console.log(`Wallet 1 balance`, balance)
@@ -58,6 +62,7 @@ const balances = async () => {
   console.log(`Wallet 2 balance`, balance2)
 }
 
+// arguments criteria for running tests
 if (process.argv[2] == '1') {
   sendFromWallet1ToWallet2()
 } else if (process.argv[2] == '2') {
