@@ -1,15 +1,15 @@
 const Wallet = require('../wallet')
-const ProxyRPC = require('./index')
+const ProxyAPI = require('./index')
 
-describe('ProxyRPC', () => {
+describe('ProxyAPI', () => {
   const hostname = 'proxy.nanos.cc'
   const path = '/proxy'
 
-  const proxyRPC = new ProxyRPC({ hostname, path })
+  const ProxyAPI = new ProxyAPI({ hostname, path })
 
   it('has hostname and path', () => {
-    expect(proxyRPC.hostname).toEqual(hostname)
-    expect(proxyRPC.path).toEqual(path)
+    expect(ProxyAPI.hostname).toEqual(hostname)
+    expect(ProxyAPI.path).toEqual(path)
   })
 
   describe('request account_info', () => {
@@ -21,7 +21,7 @@ describe('ProxyRPC', () => {
       beforeEach(async () => {
         await wallet.generate()
 
-        await proxyRPC.post({
+        await ProxyAPI.post({
           body: {
             'action': 'account_info',
             'account': wallet.address
@@ -42,7 +42,7 @@ describe('ProxyRPC', () => {
       beforeEach(async () => {
         await wallet.generate()
 
-        await proxyRPC.post({
+        await ProxyAPI.post({
           body: {
             'action': 'foo-action',
             'account': wallet.address
