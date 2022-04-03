@@ -39,8 +39,8 @@ class ProxyRPC {
       body: {
         action: 'process',
         json_block: true,
-        subtype,
-        block,
+        subtype: 'send',
+        block: blockCreated
       }
     })
   }

@@ -16,6 +16,7 @@ wallet2.importWithMnemonic(mnemonic2)
 // setup proxy rpc
 const hostname = 'proxy.nanos.cc'
 const path = '/proxy'
+https://proxy.nanos.cc/proxy
 const proxyAPI = new ProxyAPI({ hostname, path })
 const proxyRPC = new ProxyRPC({ proxyAPI })
 
@@ -62,6 +63,16 @@ const balances = async () => {
   console.log(`Wallet 2 balance`, balance2)
 }
 
+// show balance of each wallet
+const address = async () => {
+  console.log(`Wallet 1 address`, wallet.address)
+  console.log(`Wallet 2 address`, wallet2.address)
+}
+
+const histories = async () => {
+  
+}
+
 // arguments criteria for running tests
 if (process.argv[2] == '1') {
   sendFromWallet1ToWallet2()
@@ -69,4 +80,6 @@ if (process.argv[2] == '1') {
   sendFromWallet2ToWallet1()
 } else if (process.argv[2] == '3') {
   balances()
+} else if (process.argv[2] == '4') {
+  address()
 }
